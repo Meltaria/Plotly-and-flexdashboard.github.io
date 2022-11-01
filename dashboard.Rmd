@@ -1,23 +1,19 @@
 ---
-title: "Plotly examples"
-output:
-  html_document:
-    toc: true
-    toc_float: true
+title: "dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    source: embed
 ---
 
-# Examples of plotly
-
-
-We're gonna look at NYC Airbnb data.
-
-```{r}
+```{r setup, include=FALSE}
 library(tidyverse)
 library(p8105.datasets)
 library(plotly)
+library(flexdashboard)
 ```
 
-## Loading data
 ```{r}
 data("nyc_airbnb")
 
@@ -33,21 +29,10 @@ nyc_airbnb =
   drop_na(rating)
 ```
 
-# Plotly plots
+Column {data-width=650}
+-----------------------------------------------------------------------
 
-## Sctterplot
-
-```{r}
-nyc_airbnb %>%
-  plot_ly(x= ~lat, y = ~long, color = ~price, alpha = .5, 
-          type = "scatter", mode = "markers")
-```
-
-```{r}
-nyc_airbnb %>%
-  plot_ly(x= ~lat, y = ~long, color = ~price, text = ~rating, alpha = .5, 
-          type = "scatter", mode = "markers")
-```
+### Chart A
 
 ```{r}
 nyc_airbnb %>%
@@ -56,14 +41,10 @@ nyc_airbnb %>%
           type = "scatter", mode = "markers")
 ```
 
+Column {data-width=350}
+-----------------------------------------------------------------------
 
-## boxplots
-
-```{r}
-nyc_airbnb %>%
-  plot_ly(y = ~price, x = ~neighbourhood, color = ~neighbourhood,
-          type = "box")
-```
+### Chart B
 
 ```{r}
 nyc_airbnb %>%
@@ -72,7 +53,7 @@ nyc_airbnb %>%
           type = "box")
 ```
 
-## bar plot
+### Chart C
 
 ```{r}
 nyc_airbnb %>%
@@ -80,15 +61,4 @@ nyc_airbnb %>%
   mutate(neighbourhood = fct_reorder(neighbourhood, n))%>%
   plot_ly(x = ~neighbourhood, y = ~n, color = ~neighbourhood, type = "bar", colors ="viridis")
 ```
-
-```{r}
-scatter_ggplot = 
-  nyc_airbnb %>%
-  ggplot(aes(x = lat, y = long, color = price)) +
-  geom_point(alpha = 0.25) +
-  coord_cartesian()
-
-ggplotly(scatter_ggplot)
-```
-
 

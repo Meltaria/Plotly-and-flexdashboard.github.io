@@ -1,0 +1,16 @@
+name: "Plotly example"
+output_dir: "."
+navbar:
+  title: "Home"
+  right:
+    - text: "Plotly"
+      href: ploty_example.html
+    - text: "dashboard"
+      href: dashboard.html
+    - icon: fa-envelope fa-lg
+      href: mailto:<you@youremail.com>
+    - icon: fa-github fa-lg
+      href: http://github.com/Meltaria/
+output:
+  html_document:
+    theme: cerulean
